@@ -16,7 +16,7 @@ def inicio_med():
         print("Procesando... \nPermiso denegado - Usuario invalido")
   return cuenta_encontrada
 
-#cuenta = inicio_med()
+#cuenta_med = inicio_med()
 #print(cuenta)
 
 def inicio_pac():
@@ -35,11 +35,11 @@ def inicio_pac():
         print("Procesando... \nPermiso denegado - Usuario invalido")
   return cuenta_encontrada
 
-#cuenta = inicio_pac()
+#cuenta_pac = inicio_pac()
 #print(cuenta)
 
 def salir():
-  print("Gracias ", user, " por utilizar nuestro sistema.")
+  print("Gracias por utilizar nuestro sistema.")
 
 
 # defino menu inicial
@@ -63,7 +63,6 @@ def menu_inicial():
 
 while True:
   opcion = menu_inicial()
-  print("La opción elegida es: ", opcion)
 
   if opcion == 1:
     cuenta = inicio_med()
