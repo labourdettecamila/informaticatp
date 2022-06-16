@@ -10,7 +10,7 @@
 #    option = input("Opción: ")
 
 #    if option == "3":
-        active = False
+#        active = False
 
 #    elif option == "1":
 #        persona = []
@@ -27,7 +27,7 @@
 #        persona.append(datos)
 
 #    elif option == "2":
-        print(f"Historial: {persona}")
+#        print(f"Historial: {persona}")
 
 #   else:
-        print(f"La opción {option} no es válida")
+#        print(f"La opción {option} no es válida")
