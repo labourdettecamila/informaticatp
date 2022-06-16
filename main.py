@@ -1,74 +1,79 @@
-# defino funciones del menu principal
+import json
 
-def inicio_med():
-  cuenta_encontrada = {}
+from flask import Flask
+from flask import request
+from flask import jsonify
+from flask import make_response
+from pacientes import Patient
+from pacientes_loader import load_patients
 
-  user = input("Ingrese su usuario: ")
-  password = input("Ingrese la contraseña: ")
-
-  for medico in medicos:
-    if medico["user_id"] == user:
-      if medico["password"] == password:
-        print("El usuario esta logueado")
-        cuenta_encontrada = cuenta
-
-      else:
-        print("Procesando... \nPermiso denegado - Usuario invalido")
-  return cuenta_encontrada
-
-#cuenta_med = inicio_med()
-#print(cuenta)
-
-def inicio_pac():
-  cuenta_encontrada = {}
-
-  user = input("Ingrese su usuario: ")
-  password = input("Ingrese la contraseña: ")
-
-  for paciente in pacientes:
-    if paciente["user_id"] == user:
-      if paciente["password"] == password:
-        print("El usuario esta logueado")
-        cuenta_encontrada = cuenta
-
-      else:
-        print("Procesando... \nPermiso denegado - Usuario invalido")
-  return cuenta_encontrada
-
-#cuenta_pac = inicio_pac()
-#print(cuenta)
-
-def salir():
-  print("Gracias por utilizar nuestro sistema.")
+app = Flask(__name__)
+patients: list = load_patients()
 
 
-# defino menu inicial
-
-def menu_inicial():
-  opcion = 0
-  while opcion not in [1,2,3]:
-    print("App medica")
-    print("1) Ingresar como medico")
-    print("2) Ingresar como paciente")
-    print("3) Salir")
-
-    opcion = int(input("Seleccione una opcion:"))
-
-    return opcion
-
-#opcion = menu_inicial()
-#print("La opción elegida es: " , opcion)
+@app.route("/api/digital-bank/clients/", methods=['GET'])
+def get_all_clients():
+    return jsonify([cli.serialize() for cli in clients])
 
 
+@app.route("/api/digital-bank/clients/<client_id>", methods=['GET'])
+def get_client(client_id):
+    for client in clients:
+        if client.id == client_id:
+            return jsonify(client.serialize())
 
-while True:
-  opcion = menu_inicial()
+    return jsonify({})
 
-  if opcion == 1:
-    cuenta = inicio_med()
 
-  elif opcion == 2:
-    cuenta = inicio_pac()
+@app.route("/api/digital-bank/clients/", methods=['POST'])
+def create_client():
+    client = request.json
 
-  elif opcion == 3:
-    salir()
+    try:
+        new_client = Client(
+            client_id_generator(),
+            client['date_created'],
+            client['first_name'],
+            client['last_name'],
+            client['date_created'],
+            client['document'],
+            client['gender'],
+            client['phone_number'],
+            client['email'],
+            client['client_status'],
+            ClientAddress(
+                client['client_address']['street'],
+                client['client_address']['street_number'],
+                client['client_address']['city'],
+                client['client_address']['state'],
+                client['client_address']['post_code'],
+                client['client_address']['country']
+            )
+        )
+
+        clients.append(new_client)
+
+    except KeyError as key_err:
+        missing_param = (key_err.__str__())
+        return jsonify(
+            error_code="ERROR_BAD",
+            error_description="Bad request",
+            error_body=missing_param
+        ), 400
+
+    return jsonify(new_client.serialize())
+
+
+@app.route("/api/digital-bank/client-test", methods=['POST'])
+def creat_test_data():
+    client = request.json
+    client['id'] = client_id_generator()
+    client['role'] = request.args['role']
+    store_client_file(client)
+
+    print(request.args['role'])
+
+    # response = make_response(client, 201)
+    # return response
+
+    return client, 200
