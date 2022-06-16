@@ -38,7 +38,7 @@ clientes = [
         "apellido": "Azpiri",
         "fecha de nacimiento": "07/04/2003",
         "obra social": "osde",
-        "codigo postal": "C1232AAC",
+        "codigo postal": "C1407KQF",
         "altura": 1.59, "peso": 53,
         "alergias": "penicilina",
         "id": random.randint(0, 1000000)
@@ -49,7 +49,7 @@ clientes = [
         "apellido": "Pinasco",
         "fecha de nacimiento": "12/02/2002",
         "obra social": "medicus",
-        "codigo postal": "C1232AAC",
+        "codigo postal": "C1427ARN",
         "altura": 1.7, "peso": 56,
         "alergias": None,
         "id": random.randint(0, 1000000)
@@ -60,7 +60,7 @@ clientes = [
         "apellido": "Larrea",
         "fecha de nacimiento": "11/11/2012",
         "obra social": "swiss medical",
-        "codigo postal": "C1232AAC",
+        "codigo postal": "C1439CNU",
         "altura": 1.55, "peso": 60,
         "alergias": "alergia al polen",
         "id": random.randint(0, 1000000)
@@ -71,7 +71,7 @@ clientes = [
         "apellido": "Canale",
         "fecha de nacimiento": "31/08/2000",
         "obra social": "swiss medical",
-        "codigo postal": "C1232AAC",
+        "codigo postal": "C1284AGA",
         "altura": 1.7, "peso": 87,
         "alergias": "acaros",
         "id": random.randint(0, 1000000)
