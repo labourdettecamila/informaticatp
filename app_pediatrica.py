@@ -1,11 +1,11 @@
 ##active = True
 
 #while active:
-    print("\n")
-    print("App Médica - Opciones")
-    print("\t(1)Actualizar datos")
-    print("\t(2)Ver historial")
-    print("\t(3)Salir")
+#    print("\n")
+#    print("App Médica - Opciones")
+#    print("\t(1)Actualizar datos")
+#    print("\t(2)Ver historial")
+#    print("\t(3)Salir")
 
 #    option = input("Opción: ")
 
