@@ -4,19 +4,19 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import make_response
-from pacientes import Patient
-from pacientes_loader import load_patients
+from pacientes_class import Patient
+from pacientes import load_patients
 
 app = Flask(__name__)
-patients: list = load_patients()
+patients_obj: list = load_patients()
 
 
-@app.route("/api/digital-bank/clients/", methods=['GET'])
+@app.route("/api/patients/...", methods=['GET'])
 def get_all_clients():
-    return jsonify([cli.serialize() for cli in clients])
+    return jsonify([patient.serialize() for patient in patients])
 
 
-@app.route("/api/digital-bank/clients/<client_id>", methods=['GET'])
+@app.route("/api/patients/<client_id>", methods=['GET'])
 def get_client(client_id):
     for client in clients:
         if client.id == client_id:
@@ -25,7 +25,7 @@ def get_client(client_id):
     return jsonify({})
 
 
-@app.route("/api/digital-bank/clients/", methods=['POST'])
+@app.route("/api/patients/...", methods=['POST'])
 def create_client():
     client = request.json
 
@@ -77,3 +77,6 @@ def creat_test_data():
     # return response
 
     return client, 200
+
+if __name__ == "__main__":
+    app.run(debug=True , port=4000)
