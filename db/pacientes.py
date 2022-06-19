@@ -1,5 +1,5 @@
 import random
-from pacientes_class import Patient
+from clase import Patient
 
 pacientes_dic = [
     {
