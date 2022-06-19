@@ -1,4 +1,3 @@
-import random
 from clase import Patient
 
 pacientes_dic = [
@@ -10,7 +9,7 @@ pacientes_dic = [
         "codigo postal": "C1407AOM",
         "altura": 1.7, "peso": 60,
         "alergias": None,
-        "id": random.randint(0, 1000000)
+        "id": 10025
 
     },
     {
@@ -21,7 +20,7 @@ pacientes_dic = [
         "codigo postal": "C1232AAC",
         "altura": 1.5, "peso": 47,
         "alergias": "acaros",
-        "id": random.randint(0, 1000000)
+        "id": 10026
 
     },
     {
@@ -32,7 +31,7 @@ pacientes_dic = [
         "codigo postal": "C1272AAA",
         "altura": 1.61, "peso": 73,
         "alergias": "hongos",
-        "id": random.randint(0, 1000000)
+        "id": 10027
 
     },
      {
@@ -43,7 +42,7 @@ pacientes_dic = [
         "codigo postal": "C1407KQF",
         "altura": 1.59, "peso": 53,
         "alergias": "penicilina",
-        "id": random.randint(0, 1000000)
+        "id": 10028
 
     },
      {
@@ -54,7 +53,7 @@ pacientes_dic = [
         "codigo postal": "C1427ARN",
         "altura": 1.7, "peso": 56,
         "alergias": None,
-        "id": random.randint(0, 1000000)
+        "id": 10029
 
     },
      {
@@ -65,7 +64,7 @@ pacientes_dic = [
         "codigo postal": "C1439CNU",
         "altura": 1.55, "peso": 60,
         "alergias": "alergia al polen",
-        "id": random.randint(0, 1000000)
+        "id": 10030
 
     },
      {
@@ -76,12 +75,11 @@ pacientes_dic = [
         "codigo postal": "C1284AGA",
         "altura": 1.7, "peso": 87,
         "alergias": "acaros",
-        "id": random.randint(0, 1000000)
+        "id": 10031
 
     }
 ]
 
-#print(patients_dic)
 
 def load_patients():
     patients_obj = []
