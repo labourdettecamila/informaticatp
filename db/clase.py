@@ -1,10 +1,3 @@
-import random
-
-
-def patient_id_generator():
-    return str(random.randint(1000000, 9000000))
-
-
 class Patient:
 
     def __init__(self,  nombre, apellido, fecha_de_nacimiento, obra_social, codigo_postal, altura, alergias, id) -> None:
