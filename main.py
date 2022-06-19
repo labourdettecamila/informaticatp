@@ -13,12 +13,10 @@ patients_obj: list = load_patients()
 if __name__ == "__main__":
     app.run(debug=True , port=5000)
 
-#anda bien
 @app.route("/api/patients", methods=['GET'])
 def get_all_clients():
     return jsonify([patient.serialize() for patient in patients_obj])
 
-#anda bien
 @app.route("/api/patients/<client_id>", methods=['GET'])
 def get_client(client_id):
     for patient in patients_obj:
@@ -27,33 +25,24 @@ def get_client(client_id):
             return jsonify(patient.serialize())
 
     return jsonify({})
-@app.route("/api/patients/...", methods=['POST'])
-def create_client():
-    client = request.json
+
+@app.route("/api/add_patient", methods=['POST'])
+def add_patient():
+    patient = request.json
 
     try:
-        new_client = Client(
-            client_id_generator(),
-            client['date_created'],
-            client['first_name'],
-            client['last_name'],
-            client['date_created'],
-            client['document'],
-            client['gender'],
-            client['phone_number'],
-            client['email'],
-            client['client_status'],
-            ClientAddress(
-                client['client_address']['street'],
-                client['client_address']['street_number'],
-                client['client_address']['city'],
-                client['client_address']['state'],
-                client['client_address']['post_code'],
-                client['client_address']['country']
+        new_patient = Patient(
+            patient["nombre"],
+            patient["apellido"],
+            patient["nacimiento"],
+            patient["obra_social"],
+            patient["codigo_postal"],
+            patient["altura"],
+            patient["alergias"],
+            patient["id"]
             )
-        )
 
-        clients.append(new_client)
+        patients_obj.append(new_patient)
 
     except KeyError as key_err:
         missing_param = (key_err.__str__())
@@ -64,7 +53,6 @@ def create_client():
         ), 400
 
     return jsonify(new_client.serialize())
-
 
 @app.route("/api/digital-bank/client-test", methods=['POST'])
 def creat_test_data():
