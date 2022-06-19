@@ -18,11 +18,11 @@ if __name__ == "__main__":
 def get_all_clients():
     return jsonify([patient.serialize() for patient in patients_obj])
 
-#no funciona
+#anda bien
 @app.route("/api/patients/<client_id>", methods=['GET'])
 def get_client(client_id):
     for patient in patients_obj:
-        if patient.id == client_id:
+        if int(client_id) == patient.id::
 
             return jsonify(patient.serialize())
 
