@@ -13,9 +13,11 @@ patients_obj: list = load_patients()
 if __name__ == "__main__":
     app.run(debug=True , port=5000)
 
+    
 @app.route("/api/patients", methods=['GET'])
 def get_all_clients():
     return jsonify([patient.serialize() for patient in patients_obj])
+
 
 @app.route("/api/patients/<client_id>", methods=['GET'])
 def get_client(client_id):
@@ -25,6 +27,22 @@ def get_client(client_id):
             return jsonify(patient.serialize())
 
     return jsonify({})
+
+
+@app.route("/api/delete_patient/<client_id>", methods=['DELETE'])
+def delete_patient(client_id):
+    contador = 0
+
+    for patient in patients_obj:
+        if int(client_id) == patient.id:
+
+            patients_obj[contador:contador+1] = []
+
+            return "Paciente eliminado"
+        else:
+            contador += 1
+
+    return "No existe un paciente identificado con el ID: " + client_id
 
 @app.route("/api/add_patient", methods=['POST'])
 def add_patient():
@@ -67,3 +85,5 @@ def creat_test_data():
     # return response
 
     return client, 200
+
+
