@@ -123,6 +123,7 @@ def delete_patient(client_id):
     return "No existe un paciente identificado con el ID: " + client_id
 
 
+# crear nuevo paciente
 @app.route("/api/add_patient1", methods=['POST'])
 def add_patient1():
 
