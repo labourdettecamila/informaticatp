@@ -109,7 +109,7 @@ def delete_patient(client_id):
         if int(client_id) == patient.id:
             
             # si los ids coinciden elimino el paciente
-            patients_obj[contador] = []
+            patients_obj[contador:contador+1] = []
 
             return "Paciente eliminado"
         else:
