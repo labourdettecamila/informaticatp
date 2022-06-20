@@ -20,12 +20,11 @@ def get_all_clients():
 
 
 @app.route("/api/patients/<paciente_id>", methods=['GET'])
-
-
 def get_client(paciente_id):
     for patient in patients_obj:
         if int(paciente_id) == patient.id:
             return jsonify(patient.serialize())
+    return [{}]
 
 
 @app.route("/api/hospitales/<paciente_id>", methods=['GET'])
@@ -43,27 +42,35 @@ def get_hospital(paciente_id):
                     error_body=" no existe el paciente"
                     ), 500
 
-@app.route("/api/<client_id>", methods=['PUT'])
-def modify_patient(client_id):
-    body = request.json
+            
+@app.route("/api/modify", methods=['PUT'])
+def modify_patient():
+    body = request.get_json()
+    id_buscado = body["id"]
 
     contador = 0
 
     for patient in patients_obj:
-        if patient.id == client_id:
-            
-            paciente_modificado = Patient(body["nombre"], body["apellido"], body["fecha_de_nacimiento"],
-                                                          body["obra_social"], body["codigo_postal"], body["altura"],
-                                                          body["alergias"], body["id"])
-            
-            patients_obj[contador:contador + 1] = paciente_modificado
-            
+        if patient.id == int(id_buscado):
+
+            paciente_modificado = Patient(body["nombre"],
+                                          body["apellido"],
+                                          body["nacimiento"],
+                                          ObraSocial(body["obra_social"]["nombre"], body["obra_social"]["plan"],
+                                                     body["obra_social"]["numero_tarjeta"]),
+                                          body["codigo_postal"],
+                                          body["altura"],
+                                          body["peso"],
+                                          body["alergias"],
+                                          body["id"])
+
+            patients_obj[contador] = paciente_modificado
+
             return jsonify(paciente_modificado.serialize())
 
         else:
             contador += 1
-    return "No existe un paciente identificado con el ID: " + client_id
-
+    return "No existe un paciente identificado con el ID: " + id_buscado
 
 
 @app.route("/api/delete_patient/<client_id>", methods=['DELETE'])
@@ -73,7 +80,7 @@ def delete_patient(client_id):
     for patient in patients_obj:
         if int(client_id) == patient.id:
 
-            patients_obj[contador:contador+1] = []
+            patients_obj[contador] = []
 
             return "Paciente eliminado"
         else:
@@ -81,23 +88,26 @@ def delete_patient(client_id):
 
     return "No existe un paciente identificado con el ID: " + client_id
 
-@app.route("/api/add_patient", methods=['POST'])
-def add_patient():
-    patient = request.json
+
+@app.route("/api/add_patient1", methods=['POST'])
+def add_patient1():
+
+    patient = request.get_json()
 
     try:
         new_patient = Patient(
             patient["nombre"],
             patient["apellido"],
             patient["nacimiento"],
-            ObraSocial(patient["nombre_plan"], patient["plan"], patient["num_tarjeta"]),,
+            ObraSocial(patient["obra_social"]["nombre"], patient["obra_social"]["plan"], patient["obra_social"]["numero_tarjeta"]),
             patient["codigo_postal"],
             patient["altura"],
+            patient["peso"],
             patient["alergias"],
-            patient["id"]
-            )
+            patient["id"])
 
         patients_obj.append(new_patient)
+
 
     except KeyError as key_err:
         missing_param = (key_err.__str__())
@@ -107,20 +117,4 @@ def add_patient():
             error_body=missing_param
         ), 400
 
-    return jsonify(new_client.serialize())
-
-@app.route("/api/digital-bank/client-test", methods=['POST'])
-def creat_test_data():
-    client = request.json
-    client['id'] = client_id_generator()
-    client['role'] = request.args['role']
-    store_client_file(client)
-
-    print(request.args['role'])
-
-    # response = make_response(client, 201)
-    # return response
-
-    return client, 200
-
-
+    return jsonify(new_patient.serialize())
