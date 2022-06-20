@@ -4,7 +4,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import make_response
-from clase import Patient
+from clase import Patient, ObraSocial
 from pacientes import load_patients
 
 app = Flask(__name__)
@@ -90,7 +90,7 @@ def add_patient():
             patient["nombre"],
             patient["apellido"],
             patient["nacimiento"],
-            patient["obra_social"],
+            ObraSocial(patient["nombre_plan"], patient["plan"], patient["num_tarjeta"]),,
             patient["codigo_postal"],
             patient["altura"],
             patient["alergias"],
