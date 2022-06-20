@@ -34,25 +34,25 @@ def get_client(paciente_id):
 # obtiene hospitales mas cercanos segun id
 @app.route("/api/hospitales/<paciente_id>", methods=['GET'])
 def get_hospital(paciente_id):
-    
-        # recorre la lista de pacientes actuales
-        for patient in patients_obj:
-            
-            # comparo el id del paciente que estoy recorriendo con el id que paso como parametro
-            if int(paciente_id) == patient.id:
-                
-                # recorro la lista de hospitales
-                for hospi in hospitales:
-                    
-                    # si el codigo postal del hospital que estoy recorriendo coincide con el codigo postal del paciente, devuelve el hospital
-                    if hospi["cod_postal"] == patient.codigo_postal:
-                        return jsonify(hospi)
-            else :
-                return jsonify(
-                    error_code="ERROR_BAD",
-                    error_description="Bad request",
-                    error_body=" no existe el paciente"
-                    ), 500
+    # recorre la lista de pacientes actuales
+    for patient in patients_obj:
+
+        # comparo el id del paciente que estoy recorriendo con el id que paso como parametro
+        if int(paciente_id) == patient.id:
+
+            # recorro la lista de hospitales
+            for hospi in hospitales:
+
+                # si el codigo postal del hospital que estoy recorriendo coincide con el codigo postal del paciente,
+                # devuelve el hospital
+                if hospi["cod_postal"] == patient.codigo_postal:
+                    return jsonify(hospi)
+    else:
+        return jsonify(
+                error_code="ERROR_BAD",
+                error_description="Bad request",
+                error_body=" no existe el paciente"
+            ), 500
 
 
 # modificar un paciente existente            
