@@ -47,6 +47,7 @@ def get_hospital(paciente_id):
                 # devuelve el hospital
                 if hospi["cod_postal"] == patient.codigo_postal:
                     return jsonify(hospi)
+            return jsonify("No existen hospitales cercanos")
     else:
         return jsonify(
                 error_code="ERROR_BAD",
