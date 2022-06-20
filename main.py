@@ -1,9 +1,6 @@
-import json
-
 from flask import Flask
 from flask import request
 from flask import jsonify
-from flask import make_response
 from clase import Patient, ObraSocial
 from pacientes import load_patients
 from api import hospitales
