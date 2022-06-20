@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import make_response
 from clase import Patient, ObraSocial
 from pacientes import load_patients
+from api import hospitales
 
 app = Flask(__name__)
 patients_obj: list = load_patients()
