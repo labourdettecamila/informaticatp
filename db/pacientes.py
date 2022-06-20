@@ -1,7 +1,7 @@
 from clase import Patient
-
 from clase import Patient, ObraSocial
 
+# creo una lista de diccionarios de los pacientes
 pacientes_dic = [
     {
         "nombre": "Lara",
@@ -82,12 +82,17 @@ pacientes_dic = [
     }
 ]
 
-print(pacientes_dic)
 
+# defino la funcion que transforma la lista de diccionario en una lista de objetos
 def load_patients():
+    
+    # creo una lista vacia donde se agregaran los objetos
     patients_obj = []
-
+    
+    # recorro la lista de diccionarios de los pacientes
     for patient in pacientes_dic:
+        
+        # creo un objeto a partir de la informacion contenida en el diccionario que estoy recorriendo y lo agrego a la nueva lista de objetos
         patients_obj.append(
                 Patient(
                     patient['nombre'],
