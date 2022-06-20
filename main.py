@@ -127,9 +127,12 @@ def delete_patient(client_id):
 @app.route("/api/add_patient1", methods=['POST'])
 def add_patient1():
 
+    # creo una variable que guarda los datos del nuevo cliente ingresados en postman
     patient = request.get_json()
 
     try:
+        
+        # con los datos del nuevo paciente creo un objeto 
         new_patient = Patient(
             patient["nombre"],
             patient["apellido"],
@@ -141,6 +144,7 @@ def add_patient1():
             patient["alergias"],
             patient["id"])
 
+        # agrego el nuevo paciente a la lista 
         patients_obj.append(new_patient)
 
 
