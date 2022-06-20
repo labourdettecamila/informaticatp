@@ -1,3 +1,4 @@
+# creacion de la clase paciente
 class Patient:
 
     def __init__(self,  nombre, apellido, fecha_de_nacimiento, obra_social, codigo_postal, altura, alergias, id) -> None:
@@ -22,7 +23,7 @@ class Patient:
             'id': self.id,
         }
 
-
+# creacion una clase hija para la obra social
 class ObraSocial(Patient):
 
     def __init__(self, nombre, plan, numero_tarjeta) -> None:
