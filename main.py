@@ -19,15 +19,29 @@ def get_all_clients():
     return jsonify([patient.serialize() for patient in patients_obj])
 
 
-@app.route("/api/patients/<client_id>", methods=['GET'])
-def get_client(client_id):
-    for patient in patients_obj:
-        if int(client_id) == patient.id::
+@app.route("/api/patients/<paciente_id>", methods=['GET'])
 
+
+def get_client(paciente_id):
+    for patient in patients_obj:
+        if int(paciente_id) == patient.id:
             return jsonify(patient.serialize())
 
-    return jsonify({})
 
+@app.route("/api/hospitales/<paciente_id>", methods=['GET'])
+def get_hospital(paciente_id):
+
+        for patient in patients_obj:
+            if int(paciente_id) == patient.id:
+                for hospi in hospitales:
+                    if hospi["cod_postal"] == patient.codigo_postal:
+                        return hospi
+            else :
+                return jsonify(
+                    error_code="ERROR_BAD",
+                    error_description="Bad request",
+                    error_body=" no existe el paciente"
+                    ), 500
 
 @app.route("/api/<client_id>", methods=['PUT'])
 def modify_patient(client_id):
