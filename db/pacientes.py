@@ -85,26 +85,25 @@ pacientes_dic = [
 
 # defino la funcion que transforma la lista de diccionario en una lista de objetos
 def load_patients():
-    
     # creo una lista vacia donde se agregaran los objetos
     patients_obj = []
-    
+
     # recorro la lista de diccionarios de los pacientes
     for patient in pacientes_dic:
-        
         # creo un objeto a partir de la informacion contenida en el diccionario que estoy recorriendo y lo agrego a la nueva lista de objetos
         patients_obj.append(
-                Patient(
-                    patient['nombre'],
-                    patient['apellido'],
-                    patient['fecha de nacimiento'],
-                    patient['obra social'],
-                    patient['codigo postal'],
-                    patient['altura'],
-                    patient['alergias'],
-                    patient['id']
-                )
+            Patient(
+                patient['nombre'],
+                patient['apellido'],
+                patient['fecha de nacimiento'],
+                patient['obra social'],
+                patient['codigo postal'],
+                patient['altura'],
+                patient['alergias'],
+                patient["peso"],
+                patient['id']
             )
+        )
     return patients_obj
 
 
