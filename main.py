@@ -95,7 +95,7 @@ def modify_patient():
             contador += 1
             
     # si el id del paciente ingresado en postman no existe devuelve:        
-    return "No existe un paciente identificado con el ID: " + id_buscado
+    return jsonify("No existe un paciente identificado con el ID buscado")
 
 
 @app.route("/api/delete_patient/<client_id>", methods=['DELETE'])
