@@ -25,8 +25,8 @@ class Patient:
             'id': self.id,
         }
 
-# creacion una clase hija para la obra social
-class ObraSocial(Patient):
+
+class ObraSocial:
 
     def __init__(self, nombre, plan, numero_tarjeta) -> None:
         self.nombre = nombre
