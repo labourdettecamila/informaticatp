@@ -8,9 +8,6 @@ from api import hospitales
 app = Flask(__name__)
 patients_obj: list = load_patients()
 
-if __name__ == "__main__":
-    app.run(debug=True , port=5000)
-
 
 # obtiene toda la lista de clientes    
 @app.route("/api/patients", methods=['GET'])
@@ -98,15 +95,15 @@ def modify_patient():
     return jsonify("No existe un paciente identificado con el ID buscado")
 
 
-@app.route("/api/delete_patient/<client_id>", methods=['DELETE'])
-def delete_patient(client_id):
+@app.route("/api/delete_patient/<patient_id>", methods=['DELETE'])
+def delete_patient(patient_id):
     contador = 0
     
     # recorre la lista de pacientes actuales
     for patient in patients_obj:
         
         # comparo el id del paciente que estoy recorriendo con el id del paciente que quiero eliminar
-        if int(client_id) == patient.id:
+        if int(patient_id) == patient.id:
             
             # si los ids coinciden elimino el paciente
             patients_obj[contador:contador+1] = []
@@ -118,7 +115,7 @@ def delete_patient(client_id):
             contador += 1
 
     # si el id del paciente ingresado en postman no existe devuelve:           
-    return "No existe un paciente identificado con el ID: " + client_id
+    return "No existe un paciente identificado con el ID: " + patient_id
 
 
 # crear nuevo paciente
@@ -155,3 +152,6 @@ def add_patient1():
         ), 400
 
     return jsonify(new_patient.serialize())
+
+if __name__ == "__main__":
+    app.run(debug=True , port=5000)
